@@ -5,7 +5,9 @@ import 'package:google_fonts/google_fonts.dart';
 
 
 class QuestionScreen extends StatefulWidget {
-  const QuestionScreen({super.key});
+  const QuestionScreen({super.key, required this.addAnswer});
+
+  final void Function(String answer) addAnswer;
 
   @override
   State<QuestionScreen> createState() {
@@ -17,7 +19,9 @@ class _QuestionScreenState extends State<QuestionScreen> {
 
   var questionIndex = 0;
 
-  void submitAnswer() {
+  void submitAnswer(String answer) {
+    widget.addAnswer(answer);
+
     setState(() {
       questionIndex++;
     });
@@ -49,7 +53,9 @@ class _QuestionScreenState extends State<QuestionScreen> {
               height: 30,
             ),
             ...currentQuestion.getShuffledList().map((element) {
-              return AnswerButton(element, submitAnswer);
+              return AnswerButton(element, () {
+                submitAnswer(element);
+              });
             }),
           ],
         ),
