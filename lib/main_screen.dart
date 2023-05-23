@@ -21,11 +21,12 @@ class MainScreen extends StatelessWidget {
             ),
           ),
           OutlinedButton.icon(
-            icon: const Icon(
-              Icons.sailing
-            ),
+              icon: const Icon(Icons.sailing),
               onPressed: startQuiz,
-              style: OutlinedButton.styleFrom(foregroundColor: Colors.white, backgroundColor: Colors.black, shadowColor: Colors.white),
+              style: OutlinedButton.styleFrom(
+                  foregroundColor: Colors.white,
+                  backgroundColor: Colors.black,
+                  shadowColor: Colors.white),
               label: const Text(
                 'Start Quiz',
                 style: TextStyle(fontSize: 32),

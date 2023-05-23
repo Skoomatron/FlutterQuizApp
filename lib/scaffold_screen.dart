@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_app/data/questions.dart';
 import 'package:quiz_app/question_screen.dart';
+import 'package:quiz_app/results_screen.dart';
 
 import 'main_screen.dart';
 
@@ -14,7 +15,6 @@ class ScaffoldScreen extends StatefulWidget {
 }
 
 class _ScaffoldScreenState extends State<ScaffoldScreen> {
-
   Widget? activeScreen;
   List<String> selectedAnswers = [];
 
@@ -26,29 +26,35 @@ class _ScaffoldScreenState extends State<ScaffoldScreen> {
 
   void switchScreen() {
     setState(() {
-      activeScreen = QuestionScreen(
-          addAnswer: addAnswer,
-      );
+      activeScreen = QuestionScreen(addAnswer: addAnswer);
+    });
+  }
+
+  void restartQuiz() {
+    setState(() {
+      activeScreen = MainScreen(switchScreen);
     });
   }
 
   void addAnswer(String answer) {
-      selectedAnswers.add(answer);
-      if (selectedAnswers.length == questions.length) {
-        setState(() {
-          activeScreen = MainScreen(switchScreen);
-          selectedAnswers = [];
-        });
-      }
+    selectedAnswers.add(answer);
+    if (selectedAnswers.length == questions.length) {
+      setState(() {
+        activeScreen = ResultsScreen(selectedAnswers: selectedAnswers, onRestart: restartQuiz,);
+      });
+    }
   }
 
   @override
   Widget build(context) {
-    return   MaterialApp(
+    return MaterialApp(
       home: Scaffold(
         body: Container(
           decoration: const BoxDecoration(
-            gradient: LinearGradient(colors: [Colors.deepPurple, Colors.black], begin: Alignment.bottomCenter, end: Alignment.topCenter),
+            gradient: LinearGradient(
+                colors: [Colors.deepPurple, Colors.black],
+                begin: Alignment.bottomCenter,
+                end: Alignment.topCenter),
           ),
           child: activeScreen,
         ),

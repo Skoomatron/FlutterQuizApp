@@ -3,7 +3,6 @@ import 'package:quiz_app/answer_button.dart';
 import 'package:quiz_app/data/questions.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-
 class QuestionScreen extends StatefulWidget {
   const QuestionScreen({super.key, required this.addAnswer});
 
@@ -16,7 +15,6 @@ class QuestionScreen extends StatefulWidget {
 }
 
 class _QuestionScreenState extends State<QuestionScreen> {
-
   var questionIndex = 0;
 
   void submitAnswer(String answer) {
@@ -29,7 +27,6 @@ class _QuestionScreenState extends State<QuestionScreen> {
 
   @override
   Widget build(context) {
-    
     final currentQuestion = questions[questionIndex];
 
     return SizedBox(
@@ -45,8 +42,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
               style: GoogleFonts.lato(
                   color: Colors.white,
                   fontSize: 32,
-                  fontWeight: FontWeight.bold
-              ),
+                  fontWeight: FontWeight.bold),
               textAlign: TextAlign.center,
             ),
             const SizedBox(
